@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.coldchain.server.mapper.CarStateMapper">
+    <resultMap id="CarStateMap" type="com.example.coldchain.server.pojo.CarState" >
+        <result column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="password" property="password" />
+        <result column="tele_num" property="teleNum" />
+        <result column="company" property="company" />
+        <result column="department" property="department" />
+        <result column="email" property="email" />
+        <result column="kind" property="kind" />
+        <result column="delete" property="delete" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+    <select id="findsById" resultMap="CarStateMap">
+        select * from carstate where id = #{id}
+    </select>
+    <select id="findAll" resultMap="CarStateMap">
+        select * from carstate
+    </select>
+
+</mapper>

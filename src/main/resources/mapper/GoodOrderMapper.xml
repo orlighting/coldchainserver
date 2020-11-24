@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.coldchain.server.mapper.GoodOrderMapper">
+    <resultMap id="GoodOrderMap" type="com.example.coldchain.server.pojo.GoodOrder" >
+        <result column="id" property="id" />
+        <result column="driver_id" property="driverId" />
+        <result column="good_kind" property="goodKind" />
+        <result column="good_name" property="goodName" />
+        <result column="starting" property="starting" />
+        <result column="destination" property="destination" />
+        <result column="car_id" property="carId" />
+        <result column="complete" property="complete" />
+        <result column="temp_high" property="tempHigh" />
+        <result column="temp_low" property="tempLow" />
+        <result column="humidity_high" property="humidityHigh" />
+        <result column="humidity_low" property="humidityLow" />
+        <result column="delete" property="delete" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+    <select id="findsById" resultMap="GoodOrderMap">
+        select * from goodorder where id = #{id}
+    </select>
+    <select id="findAll" resultMap="GoodOrderMap">
+        select * from goodorder
+    </select>
+
+</mapper>

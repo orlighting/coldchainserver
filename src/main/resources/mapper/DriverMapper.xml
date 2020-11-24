@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.coldchain.server.mapper.DriverMapper">
+    <resultMap id="DriverMap" type="com.example.coldchain.server.pojo.Driver" >
+        <result column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="face_token" property="faceToken" />
+        <result column="drive_year" property="driveYear" />
+        <result column="drive_license" property="driveLicense" />
+        <result column="check_state" property="checkState" />
+        <result column="delete" property="delete" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+    <select id="findsById" resultMap="DriverMap">
+        select * from driver where id = #{id}
+    </select>
+    <select id="findAll" resultMap="DriverMap">
+        select * from driver
+    </select>
+
+</mapper>
