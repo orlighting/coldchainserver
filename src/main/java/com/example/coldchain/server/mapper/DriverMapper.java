@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface DriverMapper {
 
-    Driver findsById(Integer id);
+    Driver findsById(Long id);
 
     List<Driver> findsAll();
 
