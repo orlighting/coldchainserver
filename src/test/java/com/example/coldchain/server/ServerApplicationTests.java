@@ -8,6 +8,8 @@ class ServerApplicationTests {
 
     @Test
     void contextLoads() {
+        //尝试
+        System.out.println("firstTry");
     }
 
 }
