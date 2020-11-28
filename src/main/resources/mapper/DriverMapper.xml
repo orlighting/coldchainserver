@@ -123,4 +123,12 @@
         id = #{id}
     </select>
 
+    <select id="getNoteCheckList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM driver
+        WHERE
+        check_state = #{checkStatus}
+    </select>
+
 </mapper>

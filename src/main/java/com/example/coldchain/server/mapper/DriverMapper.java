@@ -30,4 +30,12 @@ public interface DriverMapper {
      */
     Driver getByPrimaryKey(Long id);
 
+    /**
+     * 根据审核状态获取司机信息
+     *
+     * @param checkStatus
+     * @return
+     */
+    List<Driver> getNoteCheckList(Integer checkStatus);
+
 }

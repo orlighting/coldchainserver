@@ -20,72 +20,72 @@ public class CarState {
     /**
      * 1号传感器温度
      */
-    private Float temperature1;
+    private String temperature1;
 
     /**
      * 2号传感器温度
      */
-    private Float temperature2;
+    private String temperature2;
 
     /**
      * 3号传感器温度
      */
-    private Float temperature3;
+    private String temperature3;
 
     /**
      * 4号传感器温度
      */
-    private Float temperature4;
+    private String temperature4;
 
     /**
      * 5号传感器温度
      */
-    private Float temperature5;
+    private String temperature5;
 
     /**
      * 6号传感器温度
      */
-    private Float temperature6;
+    private String temperature6;
 
     /**
      * 7号传感器温度
      */
-    private Float temperature7;
+    private String temperature7;
 
     /**
      * 1号传感器湿度
      */
-    private Float humidity1;
+    private String humidity1;
 
     /**
      * 2号传感器湿度
      */
-    private Float humidity2;
+    private String humidity2;
 
     /**
      * 3号传感器湿度
      */
-    private Float humidity3;
+    private String humidity3;
 
     /**
      * 4号传感器湿度
      */
-    private Float humidity4;
+    private String humidity4;
 
     /**
      * 5号传感器湿度
      */
-    private Float humidity5;
+    private String humidity5;
 
     /**
      * 6号传感器湿度
      */
-    private Float humidity6;
+    private String humidity6;
 
     /**
      * 7号传感器湿度
      */
-    private Float humidity7;
+    private String humidity7;
 
     /**
      * 开关门信息
@@ -95,7 +95,7 @@ public class CarState {
     /**
      * 经度
      */
-    private Float longitude;
+    private String longitude;
 
     /**
      * 经度状态
@@ -105,7 +105,7 @@ public class CarState {
     /**
      * 纬度
      */
-    private Float latitude;
+    private String latitude;
 
     /**
      * 纬度状态
