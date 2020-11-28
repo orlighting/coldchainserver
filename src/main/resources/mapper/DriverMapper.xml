@@ -1,24 +1,126 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.example.coldchain.server.mapper.DriverMapper">
-    <resultMap id="DriverMap" type="com.example.coldchain.server.pojo.Driver" >
-        <result column="id" property="id" />
-        <result column="name" property="name" />
-        <result column="face_token" property="faceToken" />
-        <result column="drive_year" property="driveYear" />
-        <result column="drive_license" property="driveLicense" />
-        <result column="check_state" property="checkState" />
-        <result column="delete" property="delete" />
-        <result column="create_time" property="createTime" />
-        <result column="update_time" property="updateTime" />
+
+    <resultMap id="BaseResultMap" type="com.example.coldchain.server.pojo.Driver">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="faceToken" column="face_token"/>
+        <result property="driveYear" column="drive_year"/>
+        <result property="driveLicense" column="drive_license"/>
+        <result property="checkState" column="check_state"/>
+        <result property="delete" column="delete"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
     </resultMap>
-    <select id="findsById" resultMap="DriverMap">
-        select * from driver where id = #{id}
-    </select>
-    <select id="findAll" resultMap="DriverMap">
-        select * from driver
+
+    <sql id="Base_Column_List">
+        id ,name ,face_token ,drive_year ,drive_license ,check_state ,delete ,create_time ,update_time
+    </sql>
+
+    <insert id="saveSelective"  useGeneratedKeys="true" keyProperty="id"  parameterType="com.example.coldchain.server.pojo.Driver">
+        INSERT INTO driver
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="null!=id">
+                id  ,
+            </if>
+            <if test="null!=name">
+                name  ,
+            </if>
+            <if test="null!=faceToken">
+                face_token  ,
+            </if>
+            <if test="null!=driveYear">
+                drive_year  ,
+            </if>
+            <if test="null!=driveLicense">
+                drive_license  ,
+            </if>
+            <if test="null!=checkState">
+                check_state  ,
+            </if>
+            <if test="null!=delete">
+                delete  ,
+            </if>
+            <if test="null!=createTime">
+                create_time  ,
+            </if>
+            <if test="null!=updateTime">
+                update_time
+            </if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="null!=id">
+                #{id, jdbcType=BIGINT} ,
+            </if>
+            <if test="null!=name">
+                #{name, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=faceToken">
+                #{faceToken, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=driveYear">
+                #{driveYear, jdbcType=INTEGER} ,
+            </if>
+            <if test="null!=driveLicense">
+                #{driveLicense, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=checkState">
+                #{checkState, jdbcType=INTEGER} ,
+            </if>
+            <if test="null!=delete">
+                #{delete, jdbcType=TINYINT} ,
+            </if>
+            <if test="null!=createTime">
+                #{createTime, jdbcType=TIMESTAMP} ,
+            </if>
+            <if test="null!=updateTime">
+                #{updateTime, jdbcType=TIMESTAMP}
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.example.coldchain.server.pojo.Driver">
+        UPDATE driver
+        <set>
+            <if test="null!=name and ''!=name ">
+                name = #{name, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=faceToken and ''!=faceToken ">
+                face_token = #{faceToken, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=driveYear">
+                drive_year = #{driveYear, jdbcType=INTEGER} ,
+            </if>
+            <if test="null!=driveLicense and ''!=driveLicense ">
+                drive_license = #{driveLicense, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=checkState">
+                check_state = #{checkState, jdbcType=INTEGER} ,
+            </if>
+            <if test="null!=delete">
+                delete = #{delete, jdbcType=TINYINT} ,
+            </if>
+            <if test="null!=createTime">
+                create_time = #{createTime, jdbcType=TIMESTAMP} ,
+            </if>
+            <if test="null!=updateTime">
+                update_time = #{updateTime, jdbcType=TIMESTAMP}
+            </if>
+        </set>
+        WHERE
+        id = #{id}
+    </update>
+
+    <select id="getByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM driver
+        WHERE
+        id = #{id}
     </select>
 
 </mapper>

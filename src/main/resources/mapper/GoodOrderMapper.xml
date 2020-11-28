@@ -1,30 +1,196 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.example.coldchain.server.mapper.GoodOrderMapper">
-    <resultMap id="GoodOrderMap" type="com.example.coldchain.server.pojo.GoodOrder" >
-        <result column="id" property="id" />
-        <result column="driver_id" property="driverId" />
-        <result column="good_kind" property="goodKind" />
-        <result column="good_name" property="goodName" />
-        <result column="starting" property="starting" />
-        <result column="destination" property="destination" />
-        <result column="car_id" property="carId" />
-        <result column="complete" property="complete" />
-        <result column="temp_high" property="tempHigh" />
-        <result column="temp_low" property="tempLow" />
-        <result column="humidity_high" property="humidityHigh" />
-        <result column="humidity_low" property="humidityLow" />
-        <result column="delete" property="delete" />
-        <result column="create_time" property="createTime" />
-        <result column="update_time" property="updateTime" />
+
+    <resultMap id="BaseResultMap" type="com.example.coldchain.server.pojo.GoodOrder">
+        <result property="id" column="id"/>
+        <result property="driverId" column="driver_id"/>
+        <result property="goodKind" column="good_kind"/>
+        <result property="goodName" column="good_name"/>
+        <result property="starting" column="starting"/>
+        <result property="destination" column="destination"/>
+        <result property="carId" column="car_id"/>
+        <result property="complete" column="complete"/>
+        <result property="tempHigh" column="temp_high"/>
+        <result property="tempLow" column="temp_low"/>
+        <result property="humidityHigh" column="humidity_high"/>
+        <result property="humidityLow" column="humidity_low"/>
+        <result property="videoHttp" column="video_http"/>
+        <result property="delete" column="delete"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
     </resultMap>
-    <select id="findsById" resultMap="GoodOrderMap">
-        select * from goodorder where id = #{id}
-    </select>
-    <select id="findAll" resultMap="GoodOrderMap">
-        select * from goodorder
+
+    <sql id="Base_Column_List">
+        id ,driver_id ,good_kind ,good_name ,starting ,destination ,car_id ,complete ,temp_high ,temp_low ,humidity_high ,humidity_low ,video_http ,delete ,create_time ,update_time
+    </sql>
+
+    <insert id="saveSelective"  useGeneratedKeys="true" keyProperty="id"  parameterType="com.example.coldchain.server.pojo.GoodOrder">
+        INSERT INTO goodorder
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="null!=id">
+                id  ,
+            </if>
+            <if test="null!=driverId">
+                driver_id  ,
+            </if>
+            <if test="null!=goodKind">
+                good_kind  ,
+            </if>
+            <if test="null!=goodName">
+                good_name  ,
+            </if>
+            <if test="null!=starting">
+                starting  ,
+            </if>
+            <if test="null!=destination">
+                destination  ,
+            </if>
+            <if test="null!=carId">
+                car_id  ,
+            </if>
+            <if test="null!=complete">
+                complete  ,
+            </if>
+            <if test="null!=tempHigh">
+                temp_high  ,
+            </if>
+            <if test="null!=tempLow">
+                temp_low  ,
+            </if>
+            <if test="null!=humidityHigh">
+                humidity_high  ,
+            </if>
+            <if test="null!=humidityLow">
+                humidity_low  ,
+            </if>
+            <if test="null!=videoHttp">
+                video_http  ,
+            </if>
+            <if test="null!=delete">
+                delete  ,
+            </if>
+            <if test="null!=createTime">
+                create_time  ,
+            </if>
+            <if test="null!=updateTime">
+                update_time
+            </if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="null!=id">
+                #{id, jdbcType=BIGINT} ,
+            </if>
+            <if test="null!=driverId">
+                #{driverId, jdbcType=BIGINT} ,
+            </if>
+            <if test="null!=goodKind">
+                #{goodKind, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=goodName">
+                #{goodName, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=starting">
+                #{starting, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=destination">
+                #{destination, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=carId">
+                #{carId, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=complete">
+                #{complete, jdbcType=TINYINT} ,
+            </if>
+            <if test="null!=tempHigh">
+                #{tempHigh, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=tempLow">
+                #{tempLow, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=humidityHigh">
+                #{humidityHigh, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=humidityLow">
+                #{humidityLow, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=videoHttp">
+                #{videoHttp, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=delete">
+                #{delete, jdbcType=TINYINT} ,
+            </if>
+            <if test="null!=createTime">
+                #{createTime, jdbcType=TIMESTAMP} ,
+            </if>
+            <if test="null!=updateTime">
+                #{updateTime, jdbcType=TIMESTAMP}
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.example.coldchain.server.pojo.GoodOrder">
+        UPDATE goodorder
+        <set>
+            <if test="null!=driverId">
+                driver_id = #{driverId, jdbcType=BIGINT} ,
+            </if>
+            <if test="null!=goodKind and ''!=goodKind ">
+                good_kind = #{goodKind, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=goodName and ''!=goodName ">
+                good_name = #{goodName, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=starting and ''!=starting ">
+                starting = #{starting, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=destination and ''!=destination ">
+                destination = #{destination, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=carId and ''!=carId ">
+                car_id = #{carId, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=complete">
+                complete = #{complete, jdbcType=TINYINT} ,
+            </if>
+            <if test="null!=tempHigh and ''!=tempHigh ">
+                temp_high = #{tempHigh, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=tempLow and ''!=tempLow ">
+                temp_low = #{tempLow, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=humidityHigh and ''!=humidityHigh ">
+                humidity_high = #{humidityHigh, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=humidityLow and ''!=humidityLow ">
+                humidity_low = #{humidityLow, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=videoHttp and ''!=videoHttp ">
+                video_http = #{videoHttp, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=delete">
+                delete = #{delete, jdbcType=TINYINT} ,
+            </if>
+            <if test="null!=createTime">
+                create_time = #{createTime, jdbcType=TIMESTAMP} ,
+            </if>
+            <if test="null!=updateTime">
+                update_time = #{updateTime, jdbcType=TIMESTAMP}
+            </if>
+        </set>
+        WHERE
+        id = #{id}
+    </update>
+
+    <select id="getByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM goodorder
+        WHERE
+        id = #{id}
     </select>
 
 </mapper>

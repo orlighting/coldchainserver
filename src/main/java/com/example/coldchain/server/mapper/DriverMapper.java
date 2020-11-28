@@ -6,8 +6,28 @@ import java.util.List;
 
 public interface DriverMapper {
 
-    Driver findsById(Long id);
+    /**
+     * 插入一行数据，如果字段为null，则不处理
+     *
+     * @param driver driver
+     * @return count
+     */
+    int saveSelective(Driver driver);
 
-    List<Driver> findsAll();
+    /**
+     * 根据主键更新一行数据，如果字段为null，则不处理
+     *
+     * @param driver driver
+     * @return count
+     */
+    int updateByPrimaryKeySelective(Driver driver);
+
+    /**
+     * 根据主键查询一条数据
+     *
+     * @param id id
+     * @return po
+     */
+    Driver getByPrimaryKey(Long id);
 
 }

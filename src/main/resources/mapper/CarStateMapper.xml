@@ -1,26 +1,265 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.example.coldchain.server.mapper.CarStateMapper">
-    <resultMap id="CarStateMap" type="com.example.coldchain.server.pojo.CarState" >
-        <result column="id" property="id" />
-        <result column="name" property="name" />
-        <result column="password" property="password" />
-        <result column="tele_num" property="teleNum" />
-        <result column="company" property="company" />
-        <result column="department" property="department" />
-        <result column="email" property="email" />
-        <result column="kind" property="kind" />
-        <result column="delete" property="delete" />
-        <result column="create_time" property="createTime" />
-        <result column="update_time" property="updateTime" />
+
+    <resultMap id="BaseResultMap" type="com.example.coldchain.server.pojo.CarState">
+        <result property="orderId" column="order_id"/>
+        <result property="createTime" column="create_time"/>
+        <result property="temperature1" column="temperature1"/>
+        <result property="temperature2" column="temperature2"/>
+        <result property="temperature3" column="temperature3"/>
+        <result property="temperature4" column="temperature4"/>
+        <result property="temperature5" column="temperature5"/>
+        <result property="temperature6" column="temperature6"/>
+        <result property="temperature7" column="temperature7"/>
+        <result property="humidity1" column="humidity1"/>
+        <result property="humidity2" column="humidity2"/>
+        <result property="humidity3" column="humidity3"/>
+        <result property="humidity4" column="humidity4"/>
+        <result property="humidity5" column="humidity5"/>
+        <result property="humidity6" column="humidity6"/>
+        <result property="humidity7" column="humidity7"/>
+        <result property="doorState" column="door_state"/>
+        <result property="longitude" column="longitude"/>
+        <result property="longitudeState" column="longitude_state"/>
+        <result property="latitude" column="latitude"/>
+        <result property="latitudeState" column="latitude_state"/>
+        <result property="alert" column="alert"/>
+        <result property="delete" column="delete"/>
     </resultMap>
-    <select id="findsById" resultMap="CarStateMap">
-        select * from carstate where id = #{id}
-    </select>
-    <select id="findAll" resultMap="CarStateMap">
-        select * from carstate
+
+    <sql id="Base_Column_List">
+        order_id ,create_time ,temperature1 ,temperature2 ,temperature3 ,temperature4 ,temperature5 ,temperature6 ,temperature7 ,humidity1 ,humidity2 ,humidity3 ,humidity4 ,humidity5 ,humidity6 ,humidity7 ,door_state ,longitude ,longitude_state ,latitude ,latitude_state ,alert ,delete
+    </sql>
+
+    <insert id="saveSelective"  parameterType="com.example.coldchain.server.pojo.CarState">
+        INSERT INTO carstate
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="null!=orderId">
+                order_id  ,
+            </if>
+            <if test="null!=createTime">
+                create_time  ,
+            </if>
+            <if test="null!=temperature1">
+                temperature1  ,
+            </if>
+            <if test="null!=temperature2">
+                temperature2  ,
+            </if>
+            <if test="null!=temperature3">
+                temperature3  ,
+            </if>
+            <if test="null!=temperature4">
+                temperature4  ,
+            </if>
+            <if test="null!=temperature5">
+                temperature5  ,
+            </if>
+            <if test="null!=temperature6">
+                temperature6  ,
+            </if>
+            <if test="null!=temperature7">
+                temperature7  ,
+            </if>
+            <if test="null!=humidity1">
+                humidity1  ,
+            </if>
+            <if test="null!=humidity2">
+                humidity2  ,
+            </if>
+            <if test="null!=humidity3">
+                humidity3  ,
+            </if>
+            <if test="null!=humidity4">
+                humidity4  ,
+            </if>
+            <if test="null!=humidity5">
+                humidity5  ,
+            </if>
+            <if test="null!=humidity6">
+                humidity6  ,
+            </if>
+            <if test="null!=humidity7">
+                humidity7  ,
+            </if>
+            <if test="null!=doorState">
+                door_state  ,
+            </if>
+            <if test="null!=longitude">
+                longitude  ,
+            </if>
+            <if test="null!=longitudeState">
+                longitude_state  ,
+            </if>
+            <if test="null!=latitude">
+                latitude  ,
+            </if>
+            <if test="null!=latitudeState">
+                latitude_state  ,
+            </if>
+            <if test="null!=alert">
+                alert  ,
+            </if>
+            <if test="null!=delete">
+                delete
+            </if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="null!=orderId">
+                #{orderId, jdbcType=BIGINT} ,
+            </if>
+            <if test="null!=createTime">
+                #{createTime, jdbcType=TIMESTAMP} ,
+            </if>
+            <if test="null!=temperature1">
+                #{temperature1, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=temperature2">
+                #{temperature2, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=temperature3">
+                #{temperature3, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=temperature4">
+                #{temperature4, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=temperature5">
+                #{temperature5, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=temperature6">
+                #{temperature6, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=temperature7">
+                #{temperature7, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=humidity1">
+                #{humidity1, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=humidity2">
+                #{humidity2, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=humidity3">
+                #{humidity3, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=humidity4">
+                #{humidity4, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=humidity5">
+                #{humidity5, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=humidity6">
+                #{humidity6, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=humidity7">
+                #{humidity7, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=doorState">
+                #{doorState, jdbcType=TINYINT} ,
+            </if>
+            <if test="null!=longitude">
+                #{longitude, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=longitudeState">
+                #{longitudeState, jdbcType=TINYINT} ,
+            </if>
+            <if test="null!=latitude">
+                #{latitude, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=latitudeState">
+                #{latitudeState, jdbcType=TINYINT} ,
+            </if>
+            <if test="null!=alert">
+                #{alert, jdbcType=TINYINT} ,
+            </if>
+            <if test="null!=delete">
+                #{delete, jdbcType=TINYINT}
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.example.coldchain.server.pojo.CarState">
+        UPDATE carstate
+        <set>
+            <if test="null!=temperature1 and ''!=temperature1 ">
+                temperature1 = #{temperature1, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=temperature2 and ''!=temperature2 ">
+                temperature2 = #{temperature2, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=temperature3 and ''!=temperature3 ">
+                temperature3 = #{temperature3, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=temperature4 and ''!=temperature4 ">
+                temperature4 = #{temperature4, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=temperature5 and ''!=temperature5 ">
+                temperature5 = #{temperature5, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=temperature6 and ''!=temperature6 ">
+                temperature6 = #{temperature6, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=temperature7 and ''!=temperature7 ">
+                temperature7 = #{temperature7, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=humidity1 and ''!=humidity1 ">
+                humidity1 = #{humidity1, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=humidity2 and ''!=humidity2 ">
+                humidity2 = #{humidity2, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=humidity3 and ''!=humidity3 ">
+                humidity3 = #{humidity3, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=humidity4 and ''!=humidity4 ">
+                humidity4 = #{humidity4, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=humidity5 and ''!=humidity5 ">
+                humidity5 = #{humidity5, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=humidity6 and ''!=humidity6 ">
+                humidity6 = #{humidity6, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=humidity7 and ''!=humidity7 ">
+                humidity7 = #{humidity7, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=doorState">
+                door_state = #{doorState, jdbcType=TINYINT} ,
+            </if>
+            <if test="null!=longitude and ''!=longitude ">
+                longitude = #{longitude, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=longitudeState">
+                longitude_state = #{longitudeState, jdbcType=TINYINT} ,
+            </if>
+            <if test="null!=latitude and ''!=latitude ">
+                latitude = #{latitude, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=latitudeState">
+                latitude_state = #{latitudeState, jdbcType=TINYINT} ,
+            </if>
+            <if test="null!=alert">
+                alert = #{alert, jdbcType=TINYINT} ,
+            </if>
+            <if test="null!=delete">
+                delete = #{delete, jdbcType=TINYINT}
+            </if>
+        </set>
+        WHERE
+        order_id = #{orderId} ,
+        create_time = #{createTime}
+    </update>
+
+    <select id="getByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM carstate
+        WHERE
+        order_id = #{orderId} ,
+        create_time = #{createTime}
     </select>
 
 </mapper>

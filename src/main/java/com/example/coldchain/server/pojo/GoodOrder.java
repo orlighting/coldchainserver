@@ -68,6 +68,11 @@ public class GoodOrder {
     private Float humidityLow;
 
     /**
+     * 视频流url
+     */
+    private String videoHttp;
+
+    /**
      * 是否被删除
      */
     private Boolean delete;
