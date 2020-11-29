@@ -253,13 +253,28 @@
         create_time = #{createTime}
     </update>
 
-    <select id="getByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <select id="getByOrderId" parameterType="java.lang.Long" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List" />
         FROM carstate
         WHERE
-        order_id = #{orderId} ,
-        create_time = #{createTime}
+        order_id = #{orderId}
+        ORDER BY create_time
+    </select>
+
+    <select id="getCarLatestStateByOrderIdList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM carstate,
+        (select t.order_id, MAX(t.create_time) maxtime from carstate t
+        where t.order_id in
+        <foreach item="item" collection="orderIdList" separator="," open="(" close=")" index="index">
+            #{item}
+        </foreach>
+        group by t.order_id) u
+        WHERE
+        order_id = u.order_id AND
+        create_time = u.maxtime
     </select>
 
 </mapper>

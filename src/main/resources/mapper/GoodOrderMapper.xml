@@ -192,5 +192,13 @@
         WHERE
         id = #{id}
     </select>
+    <select id="getNotCompeteOrderList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM goodorder
+        WHERE
+        complete = 0
+        ORDER BY ID
+    </select>
 
 </mapper>

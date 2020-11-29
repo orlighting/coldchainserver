@@ -30,4 +30,10 @@ public interface GoodOrderMapper {
      */
     GoodOrder getByPrimaryKey(Long id);
 
+    /**
+     * 获取所有未完成的订单
+     *
+     * @return
+     */
+    List<GoodOrder> getNotCompeteOrderList();
 }

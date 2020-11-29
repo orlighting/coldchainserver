@@ -25,10 +25,18 @@ public interface CarStateMapper {
     /**
      * 根据主键查询一条数据
      *
-     * @param id id
+     * @param orderId id
      * @return po
      */
-    CarState getByPrimaryKey(Long id);
+    List<CarState> getByOrderId(Long orderId);
+
+    /**
+     * 根据主键查询一条数据
+     *
+     * @param orderIdList
+     * @return po
+     */
+    List<CarState> getCarLatestStateByOrderIdList(List<Long> orderIdList);
 
 
 }
