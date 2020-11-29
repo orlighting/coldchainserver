@@ -20,7 +20,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id ,name ,password ,tele_num ,company ,department ,email ,kind ,delete ,create_time ,update_time
+        id ,`name` ,password ,tele_num ,company ,department ,email ,kind ,`delete` ,create_time ,update_time
     </sql>
 
     <insert id="saveSelective"  useGeneratedKeys="true" keyProperty="id"  parameterType="com.example.coldchain.server.pojo.Admin">
@@ -30,7 +30,7 @@
                 id  ,
             </if>
             <if test="null!=name">
-                name  ,
+                `name`  ,
             </if>
             <if test="null!=password">
                 password  ,
@@ -51,7 +51,7 @@
                 kind  ,
             </if>
             <if test="null!=delete">
-                delete  ,
+                `delete`  ,
             </if>
             <if test="null!=createTime">
                 create_time  ,

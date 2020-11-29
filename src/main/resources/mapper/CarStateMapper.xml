@@ -32,7 +32,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        order_id ,create_time ,temperature1 ,temperature2 ,temperature3 ,temperature4 ,temperature5 ,temperature6 ,temperature7 ,humidity1 ,humidity2 ,humidity3 ,humidity4 ,humidity5 ,humidity6 ,humidity7 ,door_state ,longitude ,longitude_state ,latitude ,latitude_state ,alert ,delete
+        order_id ,create_time ,temperature1 ,temperature2 ,temperature3 ,temperature4 ,temperature5 ,temperature6 ,temperature7 ,humidity1 ,humidity2 ,humidity3 ,humidity4 ,humidity5 ,humidity6 ,humidity7 ,door_state ,longitude ,longitude_state ,latitude ,latitude_state ,alert ,`delete`
     </sql>
 
     <insert id="saveSelective"  parameterType="com.example.coldchain.server.pojo.CarState">
@@ -245,7 +245,7 @@
                 alert = #{alert, jdbcType=TINYINT} ,
             </if>
             <if test="null!=delete">
-                delete = #{delete, jdbcType=TINYINT}
+                `delete` = #{delete, jdbcType=TINYINT}
             </if>
         </set>
         WHERE
@@ -264,8 +264,8 @@
 
     <select id="getCarLatestStateByOrderIdList" resultMap="BaseResultMap">
         SELECT
-        <include refid="Base_Column_List" />
-        FROM carstate,
+        tt.*
+        FROM carstate tt,
         (select t.order_id, MAX(t.create_time) maxtime from carstate t
         where t.order_id in
         <foreach item="item" collection="orderIdList" separator="," open="(" close=")" index="index">
@@ -273,8 +273,8 @@
         </foreach>
         group by t.order_id) u
         WHERE
-        order_id = u.order_id AND
-        create_time = u.maxtime
+        tt.order_id = u.order_id AND
+        tt.create_time = u.maxtime
     </select>
 
 </mapper>

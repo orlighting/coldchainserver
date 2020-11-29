@@ -25,7 +25,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id ,driver_id ,good_kind ,good_name ,starting ,destination ,car_id ,complete ,temp_high ,temp_low ,humidity_high ,humidity_low ,video_http ,delete ,create_time ,update_time
+        id ,driver_id ,good_kind ,good_name ,starting ,destination ,car_id ,complete ,temp_high ,temp_low ,humidity_high ,humidity_low ,video_http ,`delete` ,create_time ,update_time
     </sql>
 
     <insert id="saveSelective"  useGeneratedKeys="true" keyProperty="id"  parameterType="com.example.coldchain.server.pojo.GoodOrder">
@@ -71,7 +71,7 @@
                 video_http  ,
             </if>
             <if test="null!=delete">
-                delete  ,
+                `delete`  ,
             </if>
             <if test="null!=createTime">
                 create_time  ,
@@ -172,7 +172,7 @@
                 video_http = #{videoHttp, jdbcType=VARCHAR} ,
             </if>
             <if test="null!=delete">
-                delete = #{delete, jdbcType=TINYINT} ,
+                `delete` = #{delete, jdbcType=TINYINT} ,
             </if>
             <if test="null!=createTime">
                 create_time = #{createTime, jdbcType=TIMESTAMP} ,
