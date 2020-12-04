@@ -29,37 +29,49 @@ public class ReceiveController {
 
     @CrossOrigin
     @PostMapping("/driver")
-    public HttpResult<Void> receiveDriverInfo(@RequestBody Driver driver) {
-        // TODO 生成ID
+    public HttpResult<Long> receiveDriverInfo(@RequestBody Driver driver) {
+
         driver.setCheckState(0);
         driver.setDelete(false);
         driver.setCreateTime(LocalDateTime.now());
         driver.setUpdateTime(LocalDateTime.now());
 
         driverMapper.saveSelective(driver);
-        return HttpResult.of();
+        return HttpResult.of(driver.getId());
     }
 
     @CrossOrigin
     @PostMapping("/carState")
     public HttpResult<Void> receiveCarState(@RequestBody CarState carState) {
-        // TODO
+
         carState.setDelete(false);
+        carState.setLatest(true);
         carState.setCreateTime(LocalDateTime.now());
 
+        carStateMapper.updateLatestByOrderId(carState.getOrderId());
         carStateMapper.saveSelective(carState);
         return HttpResult.of();
     }
 
     @CrossOrigin
     @PostMapping("/goodOrder")
-    public HttpResult<Void> receiveGoodOrder(@RequestBody GoodOrder goodOrder) {
-        // TODO
+    public HttpResult<Long> receiveGoodOrder(@RequestBody GoodOrder goodOrder) {
+
         goodOrder.setDelete(false);
         goodOrder.setCreateTime(LocalDateTime.now());
         goodOrder.setUpdateTime(LocalDateTime.now());
 
         goodOrderMapper.saveSelective(goodOrder);
+
+        return HttpResult.of(goodOrder.getId());
+    }
+
+    @CrossOrigin
+    @RequestMapping("/completeOrder")
+    public HttpResult<Void> receiveCompleteOrder(@RequestBody GoodOrder goodOrder){
+
+        goodOrderMapper.updateByPrimaryKeySelective(goodOrder);
+
         return HttpResult.of();
     }
 

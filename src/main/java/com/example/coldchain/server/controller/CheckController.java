@@ -27,7 +27,7 @@ public class CheckController {
     }
 
     @CrossOrigin
-    @PostMapping("/driverList")
+    @RequestMapping("/driverList")
     public HttpResult<List<Driver>> getNotCheckList() {
         List<Driver> driverList = driverMapper.getNoteCheckList(0);
         return HttpResult.of(driverList);

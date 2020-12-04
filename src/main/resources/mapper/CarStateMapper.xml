@@ -28,11 +28,12 @@
         <result property="latitude" column="latitude"/>
         <result property="latitudeState" column="latitude_state"/>
         <result property="alert" column="alert"/>
+        <result property="latest" column="latest"/>
         <result property="delete" column="delete"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        order_id ,create_time ,temperature1 ,temperature2 ,temperature3 ,temperature4 ,temperature5 ,temperature6 ,temperature7 ,humidity1 ,humidity2 ,humidity3 ,humidity4 ,humidity5 ,humidity6 ,humidity7 ,door_state ,longitude ,longitude_state ,latitude ,latitude_state ,alert ,`delete`
+        order_id ,create_time ,temperature1 ,temperature2 ,temperature3 ,temperature4 ,temperature5 ,temperature6 ,temperature7 ,humidity1 ,humidity2 ,humidity3 ,humidity4 ,humidity5 ,humidity6 ,humidity7 ,door_state ,longitude ,longitude_state ,latitude ,latitude_state ,alert ,latest ,`delete`
     </sql>
 
     <insert id="saveSelective"  parameterType="com.example.coldchain.server.pojo.CarState">
@@ -104,8 +105,11 @@
             <if test="null!=alert">
                 alert  ,
             </if>
+            <if test="null!=latest">
+                latest  ,
+            </if>
             <if test="null!=delete">
-                delete
+                `delete`
             </if>
         </trim>
         <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
@@ -174,6 +178,9 @@
             </if>
             <if test="null!=alert">
                 #{alert, jdbcType=TINYINT} ,
+            </if>
+            <if test="null!=latest">
+                #{latest, jdbcType=TINYINT} ,
             </if>
             <if test="null!=delete">
                 #{delete, jdbcType=TINYINT}
@@ -244,6 +251,9 @@
             <if test="null!=alert">
                 alert = #{alert, jdbcType=TINYINT} ,
             </if>
+            <if test="null!=latest">
+                latest = #{latest, jdbcType=TINYINT} ,
+            </if>
             <if test="null!=delete">
                 `delete` = #{delete, jdbcType=TINYINT}
             </if>
@@ -264,17 +274,24 @@
 
     <select id="getCarLatestStateByOrderIdList" resultMap="BaseResultMap">
         SELECT
-        tt.*
-        FROM carstate tt,
-        (select t.order_id, MAX(t.create_time) maxtime from carstate t
-        where t.order_id in
+        <include refid="Base_Column_List"/>
+        FROM carstate
+        WHERE
+        order_id in
         <foreach item="item" collection="orderIdList" separator="," open="(" close=")" index="index">
             #{item}
         </foreach>
-        group by t.order_id) u
-        WHERE
-        tt.order_id = u.order_id AND
-        tt.create_time = u.maxtime
+        and latest = 1
     </select>
+
+    <update id="updateLatestByOrderId">
+        UPDATE carstate
+        <set>
+            latest = 0
+        </set>
+        WHERE
+        order_id = #{orderId}
+        and latest = 1
+    </update>
 
 </mapper>

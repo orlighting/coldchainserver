@@ -118,6 +118,11 @@ public class CarState {
     private Boolean alert;
 
     /**
+     * 是否是该订单的最新记录
+     */
+    private Boolean latest;
+
+    /**
      * 是否被删除
      */
     private Boolean delete;

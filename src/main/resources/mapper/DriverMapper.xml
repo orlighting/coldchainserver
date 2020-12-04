@@ -28,7 +28,7 @@
                 id  ,
             </if>
             <if test="null!=name">
-                name  ,
+                `name`  ,
             </if>
             <if test="null!=faceToken">
                 face_token  ,
@@ -43,7 +43,7 @@
                 check_state  ,
             </if>
             <if test="null!=delete">
-                delete  ,
+                `delete`  ,
             </if>
             <if test="null!=createTime">
                 create_time  ,

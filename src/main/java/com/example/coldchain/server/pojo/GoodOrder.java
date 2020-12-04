@@ -40,7 +40,7 @@ public class GoodOrder {
     /**
      * 车辆id
      */
-    private Long carId;
+    private String carId;
 
     /**
      * 订单是否完成
@@ -50,22 +50,22 @@ public class GoodOrder {
     /**
      * 建议最高温度
      */
-    private Float tempHigh;
+    private String tempHigh;
 
     /**
      * 建议最低温度
      */
-    private Float tempLow;
+    private String tempLow;
 
     /**
      * 建议最高湿度
      */
-    private Float humidityHigh;
+    private String humidityHigh;
 
     /**
      * 建议最低湿度
      */
-    private Float humidityLow;
+    private String humidityLow;
 
     /**
      * 视频流url

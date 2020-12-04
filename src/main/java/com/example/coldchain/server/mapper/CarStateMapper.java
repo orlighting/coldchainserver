@@ -38,5 +38,12 @@ public interface CarStateMapper {
      */
     List<CarState> getCarLatestStateByOrderIdList(List<Long> orderIdList);
 
+    /**
+     * 根据订单编号修改当前最新的记录为非最新
+     * @param orderId
+     * @return
+     */
+    int updateLatestByOrderId(Long orderId);
+
 
 }
