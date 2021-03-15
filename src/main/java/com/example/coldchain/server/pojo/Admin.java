@@ -61,5 +61,10 @@ public class Admin {
      * 记录更新时间
      */
     private LocalDateTime updateTime;
+    /**
+     * 订单员审核标志位
+     * todo
+     */
+
 
 }

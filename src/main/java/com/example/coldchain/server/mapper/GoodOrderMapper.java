@@ -36,4 +36,9 @@ public interface GoodOrderMapper {
      * @return
      */
     List<GoodOrder> getNotCompeteOrderList();
+
+    /**
+     * 获取设备最新的订单
+     */
+    GoodOrder getOrderByDeviceId(int deviceId);
 }

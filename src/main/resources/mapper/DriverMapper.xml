@@ -9,8 +9,8 @@
         <result property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="faceToken" column="face_token"/>
-        <result property="driveYear" column="drive_year"/>
-        <result property="driveLicense" column="drive_license"/>
+        <result property="driverYear" column="driver_year"/>
+        <result property="driverLicense" column="driver_license"/>
         <result property="checkState" column="check_state"/>
         <result property="delete" column="delete"/>
         <result property="createTime" column="create_time"/>
@@ -18,7 +18,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id ,`name` ,face_token ,drive_year ,drive_license ,check_state ,`delete` ,create_time ,update_time
+        id ,`name` ,face_token ,driver_year ,driver_license ,check_state ,`delete` ,create_time ,update_time
     </sql>
 
     <insert id="saveSelective"  useGeneratedKeys="true" keyProperty="id"  parameterType="com.example.coldchain.server.pojo.Driver">
@@ -129,6 +129,13 @@
         FROM driver
         WHERE
         check_state = #{checkStatus}
+    </select>
+    <select id="getDriver" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM driver
+        WHERE
+        id = #{id}
     </select>
 
 </mapper>

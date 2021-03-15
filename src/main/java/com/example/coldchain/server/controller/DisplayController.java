@@ -1,15 +1,14 @@
 package com.example.coldchain.server.controller;
 
 import com.example.coldchain.server.mapper.CarStateMapper;
+import com.example.coldchain.server.mapper.DriverMapper;
 import com.example.coldchain.server.mapper.GoodOrderMapper;
 import com.example.coldchain.server.pojo.CarState;
+import com.example.coldchain.server.pojo.Driver;
 import com.example.coldchain.server.pojo.GoodOrder;
 import com.example.coldchain.server.result.HttpResult;
 import org.apache.commons.collections.CollectionUtils;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -28,6 +27,8 @@ public class DisplayController {
     private CarStateMapper carStateMapper;
     @Resource
     private GoodOrderMapper goodOrderMapper;
+    @Resource
+    private DriverMapper driverMapper;
 
     @CrossOrigin
     @PostMapping("/carState")
@@ -45,7 +46,7 @@ public class DisplayController {
     }
 
     @CrossOrigin
-    @PostMapping("/goodOrder")
+    @RequestMapping("/goodOrder")
     public HttpResult<List<GoodOrder>> getGoodOrder() {
         List<GoodOrder> goodOrderList = goodOrderMapper.getNotCompeteOrderList();
         return HttpResult.of(goodOrderList);
@@ -56,5 +57,12 @@ public class DisplayController {
     public HttpResult<List<CarState>> getAllCarState(Long goodOrderId) {
         List<CarState> carStateList = carStateMapper.getByOrderId(goodOrderId);
         return HttpResult.of(carStateList);
+    }
+    //那司机id查司机
+    @CrossOrigin
+    @RequestMapping("/driver")
+    public HttpResult<Driver> getDriver(Long id){
+        Driver driver2 = driverMapper.getDriver(id);
+        return HttpResult.of(driver2);
     }
 }

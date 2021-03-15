@@ -40,6 +40,7 @@ public class ReceiveController {
         return HttpResult.of(driver.getId());
     }
 
+    //接收上报数据状态接口
     @CrossOrigin
     @PostMapping("/carState")
     public HttpResult<Void> receiveCarState(@RequestBody CarState carState) {
@@ -47,12 +48,13 @@ public class ReceiveController {
         carState.setDelete(false);
         carState.setLatest(true);
         carState.setCreateTime(LocalDateTime.now());
-
+        System.out.println("接收到消息:"+carState);
         carStateMapper.updateLatestByOrderId(carState.getOrderId());
         carStateMapper.saveSelective(carState);
         return HttpResult.of();
     }
 
+    //接受订单数据接口
     @CrossOrigin
     @PostMapping("/goodOrder")
     public HttpResult<Long> receiveGoodOrder(@RequestBody GoodOrder goodOrder) {
@@ -69,6 +71,16 @@ public class ReceiveController {
     @CrossOrigin
     @RequestMapping("/completeOrder")
     public HttpResult<Void> receiveCompleteOrder(@RequestBody GoodOrder goodOrder){
+
+        goodOrderMapper.updateByPrimaryKeySelective(goodOrder);
+
+        return HttpResult.of();
+    }
+    //修改订单信息
+
+    @CrossOrigin
+    @RequestMapping("/changeOrder")
+    public HttpResult<Void> changeOrder(@RequestBody GoodOrder goodOrder){
 
         goodOrderMapper.updateByPrimaryKeySelective(goodOrder);
 

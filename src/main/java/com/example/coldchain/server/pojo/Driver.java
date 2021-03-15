@@ -1,10 +1,12 @@
 package com.example.coldchain.server.pojo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
+@AllArgsConstructor
 public class Driver {
 
     /**
@@ -25,12 +27,12 @@ public class Driver {
     /**
      * 司机的驾龄
      */
-    private Integer driveYear;
+    private String driverYear;
 
     /**
      * 司机的驾照
      */
-    private String driveLicense;
+    private String driverLicense;
 
     /**
      * 司机账号的审核状态，0-未审核状态，1-已通过，2-不通过

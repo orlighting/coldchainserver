@@ -38,4 +38,9 @@ public interface DriverMapper {
      */
     List<Driver> getNoteCheckList(Integer checkStatus);
 
+    //通过id查司机
+    Driver getDriver(Long id);
+
+    //返回所有司机
+    List<Driver> getAllDriver();
 }

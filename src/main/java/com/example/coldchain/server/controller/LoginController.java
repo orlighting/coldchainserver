@@ -2,6 +2,7 @@ package com.example.coldchain.server.controller;
 
 import com.example.coldchain.server.mapper.AdminMapper;
 import com.example.coldchain.server.pojo.Admin;
+import com.example.coldchain.server.pojo.GoodOrder;
 import com.example.coldchain.server.result.HttpResult;
 import com.example.coldchain.server.result.HttpResultCodeEnum;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class LoginController {
 
     @CrossOrigin
     @PostMapping("/admin")
-    public HttpResult<Void> adminLogin(@RequestBody Admin admin) {
+    public HttpResult<GoodOrder> adminLogin(@RequestBody Admin admin) {
         Long id = admin.getId();
 
         Admin resAdmin = adminMapper.getByPrimaryKey(id);
@@ -32,6 +33,7 @@ public class LoginController {
         return HttpResult.of(HttpResultCodeEnum.LOGIN_FAIL);
 
     }
+
 
 
 }
