@@ -19,10 +19,6 @@ public class GoodOrder {
      */
     private String goodKind;
 
-//    /**
-//     * 货物名称
-//     */
-//    private String goodName;
 
     /**
      * 起点
@@ -51,30 +47,6 @@ public class GoodOrder {
      */
     private String driverId;
 
-//    /**
-//     * 建议最高温度
-//     */
-//    private String tempHigh;
-
-//    /**
-//     * 建议最低温度
-//     */
-//    private String tempLow;
-//
-//    /**
-//     * 建议最高湿度
-//     */
-//    private String humidityHigh;
-//
-//    /**
-//     * 建议最低湿度
-//     */
-//    private String humidityLow;
-//
-//    /**
-//     * 视频流url
-//     */
-//    private String videoHttp;
 
     /**
      * 是否被删除
@@ -94,7 +66,7 @@ public class GoodOrder {
     /**
      * 订单完成状态
      */
-    private String completeState;
+    private int completeState;
 
     /**
      * 开关门计数
@@ -160,4 +132,8 @@ public class GoodOrder {
      */
     private String date;
 
+    /**
+     * 订单员编号
+     */
+    private String creatorId;
 }

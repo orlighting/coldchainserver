@@ -35,7 +35,7 @@ public interface GoodOrderMapper {
      *
      * @return
      */
-    List<GoodOrder> getNotCompeteOrderList();
+    List<GoodOrder> getNotCompeteOrderList(int completeState);
 
     /**
      * 获取设备最新的订单

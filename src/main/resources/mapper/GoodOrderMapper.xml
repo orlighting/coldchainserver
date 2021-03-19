@@ -26,24 +26,27 @@
         <result property="selfTestReportId" column="self_test_report_id"/>
         <result property="slaughter" column="slaughter"/>
         <result property="transportCompany" column="transport_company"/>
-        <result property="height" column="height"/>
+
+        <result property="loadingVideoId" column="loading_video_id"/>
         <result property="unloadingVideoId" column="unloading_video_id"/>
         <result property="date" column="date"/>
-        <result property="loadingVideoId" column="loading_video_id"/>
+        <result property="height" column="height"/>
+        <result property="creatorId" column="creator_id"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, good_kind, `starting`, destination, device_id, complete, video_http_front, video_http_back, `delete`, create_time, update_time, driver_id, car_id, count_door, error_state, quarantine_certificate_id, meat_quality_inspection_id, self_test_report_id,
-        slaughter, transport_company, height, unloading_video_id, `date`, loading_video_id
+        id, good_kind, `starting`, destination, device_id, complete, video_http_front, video_http_back, `delete`, create_time,
+        update_time, driver_id, car_id, count_door, error_state, quarantine_certificate_id, meat_quality_inspection_id,
+        self_test_report_id,slaughter, transport_company,  loading_video_id, unloading_video_id, `date`,height, creator_id
     </sql>
 
     <insert id="saveSelective"  useGeneratedKeys="true" keyProperty="id"  parameterType="com.example.coldchain.server.pojo.GoodOrder">
         insert into goodorder (id ,driver_name, driver_phone,driver_id ,good_kind ,good_name ,`starting` ,destination ,car_id ,complete ,
-                               temp_high ,temp_low ,humidity_high ,humidity_low ,car_license,video_http ,`delete` ,create_time ,update_time)
+                               temp_high ,temp_low ,humidity_high ,humidity_low ,car_license,video_http ,`delete` ,create_time ,update_time,
+                               unloading_video_id, loading_video_id, creator_id)
         values (#{id},#{driverName},#{driverPhone}, #{driverId}, #{goodKind}, #{goodName},
-        #{starting}, #{destination}, #{carId}, #{complete},
-        #{tempHigh}, #{tempLow}, #{humidityHigh}, #{humidityLow},
-        #{carLicense},#{videoHttp}, #{delete}, #{createTime}, #{updateTime})
+        #{starting}, #{destination}, #{carId}, #{complete},#{tempHigh}, #{tempLow}, #{humidityHigh}, #{humidityLow},
+        #{carLicense},#{videoHttp}, #{delete}, #{createTime}, #{updateTime}, #{unloadingVideoId},#{loadingVideoId},#{creatorId})
     </insert>
 
     <update id="updateByPrimaryKeySelective" parameterType="com.example.coldchain.server.pojo.GoodOrder">
@@ -103,6 +106,9 @@
             <if test="null!=updateTime">
                 update_time = #{updateTime, jdbcType=TIMESTAMP}
             </if>
+            <if test="null!=creatorId and ''!=creatorId">
+                creator_id = #{creatorId, jdbcType=VARCHAR} ,
+            </if>
         </set>
         WHERE
         id = #{id}
@@ -115,12 +121,12 @@
         WHERE
         id = #{id}
     </select>
-    <select id="getNotCompeteOrderList" resultMap="BaseResultMap">
+    <select id="getNotCompeteOrderList" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List" />
         FROM goodorder
         WHERE
-        complete = 0
+        complete = #{complete}
         ORDER BY ID
     </select>
 

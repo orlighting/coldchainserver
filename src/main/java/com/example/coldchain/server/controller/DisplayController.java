@@ -32,9 +32,9 @@ public class DisplayController {
 
     @CrossOrigin
     @PostMapping("/carState")
-    public HttpResult<List<CarState>> getCarState() {
+    public HttpResult<List<CarState>> getCarState(int completeState) {
 //        向前端发送所有在运行订单中的最新车辆状态消息，用于前端展示
-        List<GoodOrder> goodOrderList = goodOrderMapper.getNotCompeteOrderList();
+        List<GoodOrder> goodOrderList = goodOrderMapper.getNotCompeteOrderList(completeState);
         if (CollectionUtils.isEmpty(goodOrderList)) {
             return HttpResult.of(new ArrayList<>());
         }
@@ -47,8 +47,8 @@ public class DisplayController {
 
     @CrossOrigin
     @RequestMapping("/goodOrder")
-    public HttpResult<List<GoodOrder>> getGoodOrder() {
-        List<GoodOrder> goodOrderList = goodOrderMapper.getNotCompeteOrderList();
+    public HttpResult<List<GoodOrder>> getGoodOrder(int completeState) {
+        List<GoodOrder> goodOrderList = goodOrderMapper.getNotCompeteOrderList(completeState);
         return HttpResult.of(goodOrderList);
     }
 
