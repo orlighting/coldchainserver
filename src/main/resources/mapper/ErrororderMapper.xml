@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.coldchain.server.mapper.ErrorOrderMapper">
+  <resultMap id="BaseResultMap" type="com.example.coldchain.server.pojo.ErrorOrder">
+    <id column="order_id" jdbcType="BIGINT" property="orderId" />
+    <id column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="alert" jdbcType="INTEGER" property="alert" />
+    <result column="longitude" jdbcType="VARCHAR" property="longitude" />
+    <result column="longitude_state" jdbcType="TINYINT" property="longitudeState" />
+    <result column="latitude" jdbcType="VARCHAR" property="latitude" />
+    <result column="latitude_state" jdbcType="TINYINT" property="latitudeState" />
+    <result column="delete" jdbcType="TINYINT" property="delete" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    order_id, create_time, alert, longitude, longitude_state, latitude, latitude_state, 
+    `delete`, end_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from errororder
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.example.coldchain.server.pojo.ErrorOrder">
+    delete from errororder
+    where order_id = #{orderId,jdbcType=BIGINT}
+      and create_time = #{createTime,jdbcType=TIMESTAMP}
+  </delete>
+  <insert id="addNew" parameterType="com.example.coldchain.server.pojo.ErrorOrder">
+    insert into errororder (order_id, create_time, alert,
+      longitude, longitude_state, latitude,
+      latitude_state, `delete`, end_time
+      )
+    values (#{orderId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{alert,jdbcType=INTEGER},
+      #{longitude,jdbcType=VARCHAR}, #{longitudeState,jdbcType=TINYINT}, #{latitude,jdbcType=VARCHAR},
+      #{latitudeState,jdbcType=TINYINT}, #{delete,jdbcType=TINYINT}, #{endTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.coldchain.server.pojo.ErrorOrder">
+    insert into errororder
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="alert != null">
+        alert,
+      </if>
+      <if test="longitude != null">
+        longitude,
+      </if>
+      <if test="longitudeState != null">
+        longitude_state,
+      </if>
+      <if test="latitude != null">
+        latitude,
+      </if>
+      <if test="latitudeState != null">
+        latitude_state,
+      </if>
+      <if test="delete != null">
+        `delete`,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="alert != null">
+        #{alert,jdbcType=INTEGER},
+      </if>
+      <if test="longitude != null">
+        #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="longitudeState != null">
+        #{longitudeState,jdbcType=TINYINT},
+      </if>
+      <if test="latitude != null">
+        #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitudeState != null">
+        #{latitudeState,jdbcType=TINYINT},
+      </if>
+      <if test="delete != null">
+        #{delete,jdbcType=TINYINT},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.coldchain.server.pojo.ErrorOrder">
+    update errororder
+    <set>
+      <if test="alert != null">
+        alert = #{alert,jdbcType=INTEGER},
+      </if>
+      <if test="longitude != null">
+        longitude = #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="longitudeState != null">
+        longitude_state = #{longitudeState,jdbcType=TINYINT},
+      </if>
+      <if test="latitude != null">
+        latitude = #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitudeState != null">
+        latitude_state = #{latitudeState,jdbcType=TINYINT},
+      </if>
+      <if test="delete != null">
+        `delete` = #{delete,jdbcType=TINYINT},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=BIGINT}
+      and create_time = #{createTime,jdbcType=TIMESTAMP}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.coldchain.server.pojo.ErrorOrder">
+    update errororder
+    set alert = #{alert,jdbcType=INTEGER},
+      longitude = #{longitude,jdbcType=VARCHAR},
+      longitude_state = #{longitudeState,jdbcType=TINYINT},
+      latitude = #{latitude,jdbcType=VARCHAR},
+      latitude_state = #{latitudeState,jdbcType=TINYINT},
+      `delete` = #{delete,jdbcType=TINYINT},
+      end_time = #{endTime,jdbcType=TIMESTAMP}
+    where order_id = #{orderId,jdbcType=BIGINT}
+      and create_time = #{createTime,jdbcType=TIMESTAMP}
+  </update>
+  <update id="updateEndTimeNull" parameterType="java.time.LocalDateTime">
+    update errororder set end_time = #{endTime} where end_time is null
+  </update>
+
+  <select id="findAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from errororder
+  </select>
+
+</mapper>
