@@ -20,7 +20,7 @@
         <result property="driverId" column="driver_id"/>
         <result property="carId" column="car_id"/>
         <result property="countDoor" column="count_door"/>
-        <result property="errorState" column="error_state"/>
+        <result property="alert" column="alert"/>
         <result property="quarantineCertificateId" column="quarantine_certificate_id"/>
         <result property="meatQualityInspectionId" column="meat_quality_inspection_id"/>
         <result property="selfTestReportId" column="self_test_report_id"/>
@@ -36,7 +36,7 @@
 
     <sql id="Base_Column_List">
         id, good_kind, `starting`, destination, device_id, complete, video_http_front, video_http_back, `delete`, create_time,
-        update_time, driver_id, car_id, count_door, error_state, quarantine_certificate_id, meat_quality_inspection_id,
+        update_time, driver_id, car_id, count_door, alert, quarantine_certificate_id, meat_quality_inspection_id,
         self_test_report_id,slaughter, transport_company,  loading_video_id, unloading_video_id, `date`,height, creator_id
     </sql>
 
@@ -50,22 +50,13 @@
     </insert>
 
     <update id="updateByPrimaryKeySelective" parameterType="com.example.coldchain.server.pojo.GoodOrder">
-        UPDATE goodorder
+        update goodorder
         <set>
-            <if test="null!=driverName and ''!=driverName">
-                driver_name = #{driverName, jdbcType=VARCHAR} ,
-            </if>
-            <if test="null!=driverPhone and ''!= driverPhone">
-                driver_phone = #{driverPhone, jdbcType=VARCHAR} ,
-            </if>
             <if test="null!=driverId">
                 driver_id = #{driverId, jdbcType=BIGINT} ,
             </if>
             <if test="null!=goodKind and ''!=goodKind ">
                 good_kind = #{goodKind, jdbcType=VARCHAR} ,
-            </if>
-            <if test="null!=goodName and ''!=goodName ">
-                good_name = #{goodName, jdbcType=VARCHAR} ,
             </if>
             <if test="null!=starting and ''!=starting ">
                 `starting` = #{starting, jdbcType=VARCHAR} ,
@@ -73,45 +64,71 @@
             <if test="null!=destination and ''!=destination ">
                 destination = #{destination, jdbcType=VARCHAR} ,
             </if>
+            <if test="null!=deviceId and ''!=deviceId">
+                device_id = #{deviceId, jdbcType=VARCHAR},
+            </if>
             <if test="null!=carId and ''!=carId ">
                 car_id = #{carId, jdbcType=VARCHAR} ,
             </if>
-            <if test="null!=complete">
-                complete = #{complete, jdbcType=TINYINT} ,
-            </if>
-            <if test="null!=tempHigh and ''!=tempHigh ">
-                temp_high = #{tempHigh, jdbcType=VARCHAR} ,
-            </if>
-            <if test="null!=tempLow and ''!=tempLow ">
-                temp_low = #{tempLow, jdbcType=VARCHAR} ,
-            </if>
-            <if test="null!=humidityHigh and ''!=humidityHigh ">
-                humidity_high = #{humidityHigh, jdbcType=VARCHAR} ,
-            </if>
-            <if test="null!=humidityLow and ''!=humidityLow ">
-                humidity_low = #{humidityLow, jdbcType=VARCHAR} ,
-            </if>
-            <if test="null!=carLicense and ''!=carLicense">
-                car_license = #{carLicense, jdbcType=VARCHAR} ,
-            </if>
-            <if test="null!=videoHttp and ''!=videoHttp ">
-                video_http = #{videoHttp, jdbcType=VARCHAR} ,
-            </if>
             <if test="null!=delete">
                 `delete` = #{delete, jdbcType=TINYINT} ,
+            </if>
+            <if test="null!=completeState">
+                complete = #{completeState, jdbcType=TINYINT} ,
             </if>
             <if test="null!=createTime">
                 create_time = #{createTime, jdbcType=TIMESTAMP} ,
             </if>
             <if test="null!=updateTime">
-                update_time = #{updateTime, jdbcType=TIMESTAMP}
+                update_time = #{updateTime, jdbcType=TIMESTAMP},
             </if>
             <if test="null!=creatorId and ''!=creatorId">
                 creator_id = #{creatorId, jdbcType=VARCHAR} ,
             </if>
+            <if test="null!=countDoor and ''!=countDoor">
+                count_door = #{countDoor, jdbcType = INTEGER},
+            </if>
+            <if test="null!=alert and ''!=alert">
+                alert = #{alert, jdbcType=INTEGER},
+            </if>
+            <if test="null!=quarantineCertificateId and ''!=quarantineCertificateId">
+                quarantine_certificate_id  = #{quarantineCertificateId, jdbcType=VARCHAR},
+            </if>
+            <if test="null!=meatQualityInspectionId and ''!=meatQualityInspectionId">
+                meat_quality_inspection_id = #{meatQualityInspectionId, jdbcType=VARCHAR},
+            </if>
+            <if test="null!=selfTestReportId and ''!=selfTestReportId">
+                self_test_report_id = #{selfTestReportId, jdbcType=VARCHAR},
+            </if>
+            <if test="null!=videoHttpBack and ''!=videoHttpBack">
+                video_http_back = #{videoHttpBack, jdbcType=VARCHAR},
+            </if>
+            <if test="null!=videoHttpFront and ''!=videoHttpFront">
+                video_http_front = #{videoHttpFront, jdbcType=VARCHAR},
+            </if>
+            <if test="null!=slaughter and ''!=slaughter">
+                slaughter = #{slaughter, jdbcType=VARCHAR},
+            </if>
+            <if test="null!=transportCompany and ''!=transportCompany">
+                transport_company = #{transportCompany, jdbcType=VARCHAR},
+            </if>
+            <if test="null!=height and ''!=height">
+                height = #{height, jdbcType=VARCHAR},
+            </if>
+            <if test="null!=loadingVideoId and ''!=loadingVideoId">
+                loading_video_id = #{loadingVideoId, jdbcType=VARCHAR},
+            </if>
+            <if test="null!=unloadingVideoId and ''!=unloadingVideoId">
+                unloading_video_id = #{unloadingVideoId, jdbcType=VARCHAR},
+            </if>
+            <if test="null!=date and ''!=date">
+                `date` = #{date, jdbcType=VARCHAR},
+            </if>
+            <if test="null!=creatorId">
+                creator_id = #{creatorId, jdbcType=BIGINT}
+            </if>
         </set>
-        WHERE
-        id = #{id}
+        where id = #{id}
     </update>
 
     <select id="getByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -126,7 +143,7 @@
         <include refid="Base_Column_List" />
         FROM goodorder
         WHERE
-        complete = #{complete}
+        complete = #{completeState}
         ORDER BY ID
     </select>
 

@@ -41,4 +41,12 @@ public interface GoodOrderMapper {
      * 获取设备最新的订单
      */
     GoodOrder getOrderByDeviceId(int deviceId);
+    /**
+     * 根据订单id修改订单
+     */
+
+    int updateOrder(GoodOrder goodOrder);
+    /**
+     *
+     */
 }

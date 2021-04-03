@@ -32,9 +32,9 @@ public class DisplayController {
 
     @CrossOrigin
     @PostMapping("/carState")
-    public HttpResult<List<CarState>> getCarState(int completeState) {
+    public HttpResult<List<CarState>> getCarState(@RequestBody GoodOrder goodOrder) {
 //        向前端发送所有在运行订单中的最新车辆状态消息，用于前端展示
-        List<GoodOrder> goodOrderList = goodOrderMapper.getNotCompeteOrderList(completeState);
+        List<GoodOrder> goodOrderList = goodOrderMapper.getNotCompeteOrderList(goodOrder.getCompleteState());
         if (CollectionUtils.isEmpty(goodOrderList)) {
             return HttpResult.of(new ArrayList<>());
         }
@@ -54,15 +54,15 @@ public class DisplayController {
 
     @CrossOrigin
     @PostMapping("/allCarState")
-    public HttpResult<List<CarState>> getAllCarState(Long goodOrderId) {
-        List<CarState> carStateList = carStateMapper.getByOrderId(goodOrderId);
+    public HttpResult<List<CarState>> getAllCarState(@RequestBody GoodOrder goodOrder) {
+        List<CarState> carStateList = carStateMapper.getByOrderId(goodOrder.getId());
         return HttpResult.of(carStateList);
     }
     //那司机id查司机
     @CrossOrigin
     @RequestMapping("/driver")
-    public HttpResult<Driver> getDriver(Long id){
-        Driver driver2 = driverMapper.getDriver(id);
+    public HttpResult<Driver> getDriver(@RequestBody Driver driver){
+        Driver driver2 = driverMapper.selectByPrimaryKey(driver.getDriverId());
         return HttpResult.of(driver2);
     }
 }

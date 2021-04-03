@@ -1,18 +1,23 @@
 package com.example.coldchain.server.pojo;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
+/**
+ * @author 
+ * 
+ */
 @Data
 @AllArgsConstructor
-public class Driver {
-
+public class Driver implements Serializable {
     /**
-     * 司机工号id
+     * 司机编号
      */
-    private Long id;
+    private Long driverId;
 
     /**
      * 司机姓名
@@ -20,39 +25,32 @@ public class Driver {
     private String name;
 
     /**
-     * 司机面部信息对应的faceToken
+     * 司机电话
+     */
+    private String phoneNumber;
+
+    /**
+     * 司机面部特征
      */
     private String faceToken;
 
     /**
-     * 司机的驾龄
+     * 司机驾龄
      */
     private String driverYear;
 
     /**
-     * 司机的驾照
+     * 驾照类型
      */
     private String driverLicense;
 
-    /**
-     * 司机账号的审核状态，0-未审核状态，1-已通过，2-不通过
-     */
     private Integer checkState;
 
-    /**
-     * 是否被删除
-     */
     private Boolean delete;
 
-    /**
-     * 记录创建时间
-     */
     private LocalDateTime createTime;
 
-    /**
-     * 记录更新时间
-     */
     private LocalDateTime updateTime;
 
-
+    private static final long serialVersionUID = 1L;
 }

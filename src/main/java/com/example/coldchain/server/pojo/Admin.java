@@ -1,16 +1,18 @@
 package com.example.coldchain.server.pojo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
+@AllArgsConstructor
 public class Admin {
 
     /**
      * 管理员id
      */
-    private Long id;
+    private Long creatorId;
 
     /**
      * 管理员姓名

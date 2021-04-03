@@ -20,7 +20,7 @@ public class LoginController {
     @CrossOrigin
     @PostMapping("/admin")
     public HttpResult<GoodOrder> adminLogin(@RequestBody Admin admin) {
-        Long id = admin.getId();
+        Long id = admin.getCreatorId();
 
         Admin resAdmin = adminMapper.getByPrimaryKey(id);
         if (resAdmin == null) {

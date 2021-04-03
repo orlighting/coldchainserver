@@ -162,7 +162,7 @@
                 #{humidity7, jdbcType=VARCHAR} ,
             </if>
             <if test="null!=doorState">
-                #{doorState, jdbcType=TINYINT} ,
+                #{doorState, jdbcType=VARCHAR} ,
             </if>
             <if test="null!=longitude">
                 #{longitude, jdbcType=VARCHAR} ,
@@ -234,7 +234,7 @@
                 humidity7 = #{humidity7, jdbcType=VARCHAR} ,
             </if>
             <if test="null!=doorState">
-                door_state = #{doorState, jdbcType=TINYINT} ,
+                door_state = #{doorState, jdbcType=VARCHAR} ,
             </if>
             <if test="null!=longitude and ''!=longitude ">
                 longitude = #{longitude, jdbcType=VARCHAR} ,

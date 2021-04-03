@@ -45,7 +45,7 @@ public class GoodOrder {
     /**
      * 司机id
      */
-    private String driverId;
+    private Long driverId;
 
 
     /**
@@ -75,7 +75,7 @@ public class GoodOrder {
     /**
      * 订单异常状态
      */
-    private Boolean errorState;
+    private int alert;
 
     /**
      * 动物检疫证明id
@@ -135,5 +135,5 @@ public class GoodOrder {
     /**
      * 订单员编号
      */
-    private String creatorId;
+    private Long creatorId;
 }

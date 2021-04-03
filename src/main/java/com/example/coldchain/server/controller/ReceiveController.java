@@ -7,6 +7,7 @@ import com.example.coldchain.server.pojo.CarState;
 import com.example.coldchain.server.pojo.Driver;
 import com.example.coldchain.server.pojo.GoodOrder;
 import com.example.coldchain.server.result.HttpResult;
+import com.sun.istack.internal.NotNull;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -36,8 +37,8 @@ public class ReceiveController {
         driver.setCreateTime(LocalDateTime.now());
         driver.setUpdateTime(LocalDateTime.now());
 
-        driverMapper.saveSelective(driver);
-        return HttpResult.of(driver.getId());
+        driverMapper.insertSelective(driver);
+        return HttpResult.of(driver.getDriverId());
     }
 
     //接收上报数据状态接口
@@ -69,11 +70,12 @@ public class ReceiveController {
     }
 
     @CrossOrigin
-    @RequestMapping("/completeOrder")
+    @RequestMapping("/changeCompleteState")
     public HttpResult<Void> receiveCompleteOrder(@RequestBody GoodOrder goodOrder){
-
+        GoodOrder goodOrderOld = goodOrderMapper.getByPrimaryKey(goodOrder.getId());
+        goodOrderOld.setUpdateTime(LocalDateTime.now());
+        goodOrderOld.setCompleteState(goodOrder.getCompleteState());
         goodOrderMapper.updateByPrimaryKeySelective(goodOrder);
-
         return HttpResult.of();
     }
     //修改订单信息
@@ -81,9 +83,9 @@ public class ReceiveController {
     @CrossOrigin
     @RequestMapping("/changeOrder")
     public HttpResult<Void> changeOrder(@RequestBody GoodOrder goodOrder){
-
+        System.out.println(goodOrder);
+        goodOrder.setUpdateTime(LocalDateTime.now());
         goodOrderMapper.updateByPrimaryKeySelective(goodOrder);
-
         return HttpResult.of();
     }
 

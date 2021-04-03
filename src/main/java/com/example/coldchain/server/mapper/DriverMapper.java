@@ -1,46 +1,20 @@
 package com.example.coldchain.server.mapper;
 
 import com.example.coldchain.server.pojo.Driver;
+import jdk.internal.dynalink.linker.LinkerServices;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface DriverMapper {
+/**
+ * DriverMapper继承基类
+ */
+@Mapper
+@Repository
+public interface DriverMapper extends MyBatisBaseDao<Driver, Long> {
+    Driver selectByPrimaryKey(Long driverId);
+    int insertSelective(Driver driver);
+    List<Driver> getNoteCheckList(int i);
 
-    /**
-     * 插入一行数据，如果字段为null，则不处理
-     *
-     * @param driver driver
-     * @return count
-     */
-    int saveSelective(Driver driver);
-
-    /**
-     * 根据主键更新一行数据，如果字段为null，则不处理
-     *
-     * @param driver driver
-     * @return count
-     */
-    int updateByPrimaryKeySelective(Driver driver);
-
-    /**
-     * 根据主键查询一条数据
-     *
-     * @param id id
-     * @return po
-     */
-    Driver getByPrimaryKey(Long id);
-
-    /**
-     * 根据审核状态获取司机信息
-     *
-     * @param checkStatus
-     * @return
-     */
-    List<Driver> getNoteCheckList(Integer checkStatus);
-
-    //通过id查司机
-    Driver getDriver(Long id);
-
-    //返回所有司机
-    List<Driver> getAllDriver();
 }

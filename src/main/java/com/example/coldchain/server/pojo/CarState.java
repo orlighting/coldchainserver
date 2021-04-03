@@ -90,7 +90,7 @@ public class CarState {
     /**
      * 开关门信息
      */
-    private Boolean doorState;
+    private String doorState;
 
     /**
      * 经度
