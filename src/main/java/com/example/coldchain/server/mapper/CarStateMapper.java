@@ -44,6 +44,10 @@ public interface CarStateMapper {
      * @return
      */
     int updateLatestByOrderId(Long orderId);
+    /**
+     * 获取某一订单号对应最新记录
+     */
+    CarState getLatestCarState(Long orderId);
 
 
 }

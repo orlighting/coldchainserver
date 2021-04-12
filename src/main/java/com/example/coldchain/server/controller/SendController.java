@@ -32,12 +32,14 @@ public class SendController {
         return HttpResult.of(driverList);
     }
 
-    //返回单一订单id的所有车辆状态
+    //返回某一订单下最新一条记录
     @CrossOrigin
     @ResponseBody
     @PostMapping("/carState")
-    public HttpResult<List<CarState>> getACarState(@RequestBody CarState carState){
-        List<CarState> byOrderId = carStateMapper.getByOrderId(carState.getOrderId());
+    public HttpResult<CarState> getACarState(@RequestBody CarState carState){
+
+        CarState byOrderId = carStateMapper.getLatestCarState(carState.getOrderId());
+        System.out.println(byOrderId);
         return HttpResult.of(byOrderId);
     }
 

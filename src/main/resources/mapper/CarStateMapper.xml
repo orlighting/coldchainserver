@@ -293,5 +293,9 @@
         order_id = #{orderId}
         and latest = 1
     </update>
+    <select id="getLatestCarState" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" />
+        from carstate where order_id = #{orderId} and latest = 1
+    </select>
 
 </mapper>
